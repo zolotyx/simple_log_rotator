@@ -59,6 +59,16 @@ rotation() {
   move_log $file $N
 }
 
+
+for arg in "$@"; do
+  shift
+  case "$arg" in
+    "--config") set -- "$@" "-c" ;;
+    "--pause") set -- "$@" "-p" ;;
+    *)        set -- "$@" "$arg"
+  esac
+done
+
 while getopts ":c:p:" opt; do
   case $opt in
     c)
